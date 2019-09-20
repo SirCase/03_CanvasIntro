@@ -38,7 +38,6 @@ function handleShipAnimation() {
 }
 
 function RenderNewObject(context) {
-  // Draw a new item here using the canvas 'context' variable
   context.beginPath();
   context.strokeStyle = "rgb("+DIMENSIONS.r+", "+DIMENSIONS.g+", "+DIMENSIONS.b+")";
   context.ellipse(DIMENSIONS.x, DIMENSIONS.y, DIMENSIONS.width, DIMENSIONS.height, 0, 0, 360);
@@ -47,13 +46,18 @@ function RenderNewObject(context) {
 
 function HandleNewObjectMovement() {
 
+  ///////////////////////////////////////////////////////////////////
+  //FOR MORE INFORMATION ABOUT EACH OF THE VARIABLES, SEE CONFIG.JS//
+  ///////////////////////////////////////////////////////////////////
 
+  //Height and width pulsate between 25 and 75
   if (DIMENSIONS.width > 75 || DIMENSIONS.width < 25)
     DIRECTION.x = -DIRECTION.x;
   ;
   if (DIMENSIONS.height > 75 || DIMENSIONS.height < 25)
     DIRECTION.y = -DIRECTION.y;
   ;
+  //RGB values range between 0 and 255. They increment by the same amount but are offset 100 from each other in terms of starting position
   if (DIMENSIONS.r > 255 || DIMENSIONS.r < 0)
     DIRECTION.r = -DIRECTION.r;
   ;
@@ -63,12 +67,14 @@ function HandleNewObjectMovement() {
   if (DIMENSIONS.r > 255 || DIMENSIONS.b < 0)
     DIRECTION.b = -DIRECTION.b;
   ;
+  //If the x or y position go out of the canvas , wrap it around to the other side of the screen
   if (DIMENSIONS.x - DIMENSIONS.width > GAME.canvas.width)
     DIMENSIONS.x = 0-DIMENSIONS.width;
   ;
   if (DIMENSIONS.y - DIMENSIONS.height > GAME.canvas.height)
     DIMENSIONS.y = 0-DIMENSIONS.height;
   ;
+  //Increments all of the necessary variables, x and y by random amounts
   DIMENSIONS.width += DIRECTION.x;
   DIMENSIONS.height += DIRECTION.y;
   DIMENSIONS.r += 5 * DIRECTION.r;
